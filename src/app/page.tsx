@@ -1,6 +1,8 @@
 'use client';
 import Image from "next/image";
+import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
+
 export default function Home() {
   return (
     <div className="flex flex-col">
@@ -17,11 +19,18 @@ export default function Home() {
           </div>
         </div>
         <div className="flex justify-center items-center sm:mb-15 z-10">
-          <div className="bg-black/80 w-[30rem] h-[75vh] rounded-sm"> {/* bg-black bg-opacity-80 ใช้ไม่ได้ใน next 13+ เลยต้องใช้ bg-black/80 */}
-            <div className="flex flex-col container-from text-white w-full h-full sm:p-10">
-              <div className="text-[2rem] font-bold">เข้าสู่ระบบ</div>
-              <div className="">
-                 <TextField id="filled-basic" label="Filled" variant="filled" />
+          <div className="bg-black/70 w-[30rem] h-[75vh] rounded-sm"> {/* bg-black bg-opacity-80 ใช้ไม่ได้ใน next 13+ เลยต้องใช้ bg-black/80 */}
+            <div className="flex flex-col container-from text-white w-full h-full px-5 sm:px-15 sm:py-10">
+              <div className="text-[2rem] font-black">เข้าสู่ระบบ</div>
+              <div className="mt-6 focus:border-2 focus:border-white focus:rounded in-focus:border-2">
+                <Box
+                  component="form"
+                  sx={{ '& > :not(style)': { m: 1, width: '100%' } }}
+                  noValidate
+                  autoComplete="off"
+                >
+                  <TextField id="filled-basic" label="อีเมลหรือหมายเลขโทรศัพท์มือถือ" variant="filled" />
+                </Box>
               </div>
               <div>1</div>
               <div>1</div>

@@ -36,8 +36,8 @@ export default function Home() {
                   <TextField id="filled-basic" label="อีเมลหรือหมายเลขโทรศัพท์มือถือ" variant="filled" />
                 </Box>
               </div>
-              <div className="flex relative items-center justify-center bg-black/70 pt-4">
-                <div className={clsx("relative transition-all duration-300 w-[400px] rounded-lg", focused || value ? "border border-gray-300 bg-black/60" : "border border-gray-300 bg-black/40")}>
+              <div className="flex relative items-center justify-center bg-black/70 mt-4">
+                <div className={clsx("relative transition-all duration-300 w-full rounded-[5px]", focused || value ? "border border-gray-300 bg-black/60" : "border border-gray-300 bg-black/40")}>
                   <label
                     htmlFor="login-input"
                     className={clsx(`absolute left-4 text-zinc-400 font-bold transition-all duration-200 cursor-text`, focused || value ? "top-2 text-xs" : "top-1/2 -translate-y-1/2 text-base")}>

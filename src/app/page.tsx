@@ -2,12 +2,16 @@
 import Image from "next/image";
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
+import { useState } from "react";
+import clsx from "clsx";
 
 export default function Home() {
+  const [focused, setFocused] = useState(false);
+  const [value, setValue] = useState("");
   return (
     <div className="flex flex-col">
       <div className="relative flex flex-col bg-black sm:bg-[url('/img/netfilx-login-wallpaper.jpg')] bg-top grow">
-        <div className="absolute inset-0 bg-black/50 z-0"/>
+        <div className="absolute inset-0 bg-black/50 z-0" />
         <div className="relative z-10">
           <div className="flex sm:mx-5 w-[120px] md:mx-28 sm:w-[150px] justify-center">
             <Image
@@ -32,7 +36,31 @@ export default function Home() {
                   <TextField id="filled-basic" label="อีเมลหรือหมายเลขโทรศัพท์มือถือ" variant="filled" />
                 </Box>
               </div>
-              <div>1</div>
+              <div className="flex relative items-center justify-center bg-black/70 pt-4">
+                <div
+                  className={`relative transition-all duration-300 w-[400px] rounded-lg ${focused || value
+                      ? "border border-gray-300 bg-black/60"
+                    : "border border-gray-300 bg-black/40"
+                    }`}
+                >
+                  <label
+                    htmlFor="login-input"
+                    className={`absolute left-4 text-zinc-400 font-bold transition-all duration-200 cursor-text ${focused || value ? "top-2 text-xs" : "top-1/2 -translate-y-1/2 text-base"
+                      }`}
+                  >
+                    อีเมลหรือหมายเลขโทรศัพท์มือถือ
+                  </label>
+                  <input
+                    id="login-input"
+                    type="text"
+                    value={value}
+                    onChange={(e) => setValue(e.target.value)}
+                    onFocus={() => setFocused(true)}
+                    onBlur={() => setFocused(false)}
+                    className="w-full bg-transparent text-white pt-6 pb-2 px-4 outline-none"
+                  />
+                </div>
+              </div>
               <div>1</div>
             </div>
           </div>

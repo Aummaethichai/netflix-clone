@@ -1,13 +1,18 @@
 'use client';
 import Image from "next/image";
-import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
 import { useState } from "react";
 import clsx from "clsx";
 
 export default function Home() {
-  const [focused, setFocused] = useState(false);
-  const [value, setValue] = useState("");
+  const [username, setUsername] = useState({
+    value: '',
+    focused: false
+  });
+  const [password, setPassword] = useState({
+    value: '',
+    focused: false
+  });
+
   return (
     <div className="flex flex-col">
       <div className="relative flex flex-col bg-black sm:bg-[url('/img/netfilx-login-wallpaper.jpg')] bg-top grow">
@@ -27,29 +32,41 @@ export default function Home() {
             <div className="flex flex-col container-from text-white w-full h-full px-5 sm:px-15 sm:py-10">
               <div className="text-[2rem] font-black">เข้าสู่ระบบ</div>
               <div className="mt-6 focus:border-2 focus:border-white focus:rounded in-focus:border-2">
-                <Box
-                  component="form"
-                  sx={{ '& > :not(style)': { m: 1, width: '100%' } }}
-                  noValidate
-                  autoComplete="off"
-                >
-                  <TextField id="filled-basic" label="อีเมลหรือหมายเลขโทรศัพท์มือถือ" variant="filled" />
-                </Box>
+                <div className="flex relative items-center justify-center bg-black/70 mt-4">
+                  <div className={clsx("relative transition-all duration-300 w-full rounded-[5px]", username.focused || username.value ? "border border-gray-300 bg-black/60" : "border border-gray-300 bg-black/40")}>
+                    <label
+                      htmlFor="username-input"
+                      className={clsx(`absolute left-4 text-zinc-400 font-bold transition-all duration-200 cursor-text`, username.focused || username.value ? "top-2 text-xs" : "top-1/2 -translate-y-1/2 text-base")}>
+                      อีเมลหรือหมายเลขโทรศัพท์มือถือ
+                    </label>
+                    <input
+                      id="username-input"
+                      autoComplete="off"
+                      type="text"
+                      value={username.value}
+                      onChange={(e) => setUsername(prev => ({ ...prev, value: e.target.value }))}
+                      onFocus={() => setUsername(prev => ({ ...prev, focused: true }))}
+                      onBlur={() => setUsername(prev => ({ ...prev, focused: false }))}
+                      className="w-full bg-transparent text-white pt-6 pb-2 px-4 outline-none"
+                    />
+                  </div>
+                </div>
               </div>
               <div className="flex relative items-center justify-center bg-black/70 mt-4">
-                <div className={clsx("relative transition-all duration-300 w-full rounded-[5px]", focused || value ? "border border-gray-300 bg-black/60" : "border border-gray-300 bg-black/40")}>
+                <div className={clsx("relative transition-all duration-300 w-full rounded-[5px]", password.value || password.focused ? "border border-gray-300 bg-black/60" : "border border-gray-300 bg-black/40")}>
                   <label
-                    htmlFor="login-input"
-                    className={clsx(`absolute left-4 text-zinc-400 font-bold transition-all duration-200 cursor-text`, focused || value ? "top-2 text-xs" : "top-1/2 -translate-y-1/2 text-base")}>
-                    อีเมลหรือหมายเลขโทรศัพท์มือถือ
+                    htmlFor="pass-input"
+                    className={clsx(`absolute left-4 text-zinc-400 font-bold transition-all duration-200 cursor-text`, password.value || password.focused ? "top-2 text-xs" : "top-1/2 -translate-y-1/2 text-base")}>
+                    รหัสผ่าน
                   </label>
                   <input
-                    id="login-input"
+                    id="pass-input"
                     type="text"
-                    value={value}
-                    onChange={(e) => setValue(e.target.value)}
-                    onFocus={() => setFocused(true)}
-                    onBlur={() => setFocused(false)}
+                    autoComplete="off"
+                    value={password.value}
+                    onChange={(e) => setPassword(prev => ({ ...prev, value: e.target.value }))}
+                    onFocus={() => setPassword(prev => ({ ...prev, focused: true }))}
+                    onBlur={() => setPassword(prev => ({ ...prev, focused: false }))}
                     className="w-full bg-transparent text-white pt-6 pb-2 px-4 outline-none"
                   />
                 </div>

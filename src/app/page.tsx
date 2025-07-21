@@ -84,9 +84,18 @@ export default function Home() {
           <div className="bg-black/70 w-[30rem] h-[75vh] rounded-sm"> {/* bg-black bg-opacity-80 ใช้ไม่ได้ใน next 13+ เลยต้องใช้ bg-black/80 */}
             <div className="flex flex-col container-from text-white w-full h-full px-5 sm:px-15 sm:py-10">
               <div className="text-[2rem] font-black">เข้าสู่ระบบ</div>
-              <div className="mt-6 focus:border-2 focus:border-white focus:rounded in-focus:border-2">
-                <div className="flex relative items-center justify-center bg-black/70 mt-4">
-                  <div className={clsx("relative transition-all duration-300 w-full rounded-[5px]", username.focused || username.value ? "border border-gray-300 bg-black/60" : "border border-gray-300 bg-black/40")}>
+              <div className="mt-6">
+                <div
+                  className={clsx(
+                    "flex relative items-center justify-center mt-4 p-[2px] border-2 rounded-[8px] transition-all duration-300",
+                    username.focused ? "border-white" : "border-transparent"
+                  )}
+                >
+                  <div
+                    className={clsx(
+                      "relative transition-all duration-300 w-full rounded-[5px] border-2 bg-black/70", !textErrorEmail.check ? "border-zinc-600": "border-red-500"
+                    )}
+                  >
                     <label
                       htmlFor="username-input"
                       className={clsx(`absolute left-4 text-zinc-400 font-bold transition-all duration-200 cursor-text`, username.focused || username.value ? "top-2 text-xs" : "top-1/2 -translate-y-1/2 text-base")}>
@@ -102,19 +111,19 @@ export default function Home() {
                         checkEmail(e.target.value)
                       }}
                       onClick={() => {
-                      if (username.focused) {
-                        setTextErrorEmail({ ...textErrorEmail, check: false })
-                      } else {
-                        setTextErrorEmail({ ...textErrorEmail, check: true })
-                      }
-                    }}
+                        if (username.focused) {
+                          setTextErrorEmail({ ...textErrorEmail, check: false })
+                        } else {
+                          setTextErrorEmail({ ...textErrorEmail, check: true })
+                        }
+                      }}
                       onFocus={() => setEmail(prev => ({ ...prev, focused: true }))}
                       onBlur={() => setEmail(prev => ({ ...prev, focused: false }))}
                       className="w-full bg-transparent text-white pt-6 pb-2 px-4 outline-none"
                     />
                   </div>
                 </div>
-                {textErrorEmail.check  &&
+                {textErrorEmail.check &&
                   <div className="flex text-red-500 text-xs items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="size-6">
                       <path strokeLinejoin="round" d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
@@ -123,11 +132,20 @@ export default function Home() {
                   </div>
                 }
               </div>
-              <div className="flex relative items-center justify-center bg-black/70 mt-4">
-                <div className={clsx("relative transition-all duration-300 w-full rounded-[5px]", password.value || password.focused ? "border border-gray-300 bg-black/60" : "border border-gray-300 bg-black/40")}>
-                  <label
-                    htmlFor="pass-input"
-                    className={clsx(`absolute left-4 text-zinc-400 font-bold transition-all duration-200 cursor-text`, password.value || password.focused ? "top-2 text-xs" : "top-1/2 -translate-y-1/2 text-base")}>
+              <div
+                className={clsx(
+                  "flex relative items-center justify-center mt-2 p-[2px] border-2 rounded-[8px] transition-all duration-300",
+                  password.focused ? "border-white" : "border-transparent"
+                )}
+              >
+                <div
+                  className={clsx(
+                    "relative transition-all duration-300 w-full rounded-[5px] border-2 bg-black/70", !textErrorPass.check ? "border-zinc-600": "border-red-500"
+                  )}
+                >                  
+                <label
+                  htmlFor="pass-input"
+                  className={clsx(`absolute left-4 text-zinc-400 font-bold transition-all duration-200 cursor-text`, password.value || password.focused ? "top-2 text-xs" : "top-1/2 -translate-y-1/2 text-base")}>
                     รหัสผ่าน
                   </label>
                   <input
